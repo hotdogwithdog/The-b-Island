@@ -8,7 +8,7 @@ namespace Menu.Interfaces
     {
         void Enter();
 
-        void Update();
+        void Update(float deltaTime);
 
         void Exit();
     }
