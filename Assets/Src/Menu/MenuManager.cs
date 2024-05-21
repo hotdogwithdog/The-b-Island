@@ -2,7 +2,7 @@
 using Menu.Interfaces;
 using Menu.States;
 
-namespace Assets.Src.Menu
+namespace Menu
 {
     public class MenuManager : GeneralPurpose.Singleton<MenuManager>
     {
@@ -13,7 +13,7 @@ namespace Assets.Src.Menu
 
         public void Start()
         {
-            SetState(new MainMenuState());
+            SetState(new MainMenu());
         }
 
         public void SetState(IMenuState newState)

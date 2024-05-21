@@ -20,9 +20,11 @@ namespace Menu.States
             GameObject menuPrefab = (GameObject)Resources.Load(_menuName);
             _menu = GameObject.Instantiate(menuPrefab, _canvas.transform);
 
-            // suscripcion al observer para la logica de los menus
-
+            // suscripcion al observer para la logica de los menus, me lo llevo a sobrescribir  el método en cada menu en concreto
+            _menu.GetComponentInChildren<Menu.Navigation.MenuButtonGroup>().OnButtonClicked += OnMenuNavigation;
         }
+
+        protected abstract void OnMenuNavigation(Menu.Enums.MenuButtons type);
 
         public void Exit()
         {
