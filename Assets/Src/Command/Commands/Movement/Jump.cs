@@ -3,18 +3,18 @@ using Command.Interfaces;
 
 namespace Command.Commands.Movement
 {
-    public class MoveLeft : ICommand
+    public class Jump : ICommand
     {
-        private IMoveableReceiver _receiver;
+        private IJumperReceiver _receiver;
 
-        public MoveLeft(IMoveableReceiver receiver)
+        public Jump(IJumperReceiver receiver)
         {
             _receiver = receiver;
         }
 
         public void Execute()
         {
-            _receiver.Move(new Vector2(-1.0f, 0.0f));
+            _receiver.Jump();
         }
     }
 }

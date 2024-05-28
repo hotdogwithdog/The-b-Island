@@ -36,6 +36,10 @@ namespace Command.Clients
                     case "A":
                         _playerCommandManager.ExecuteCommand(new MoveLeft(_player));
                         break;
+                    case " ":
+                        _playerCommandManager.ExecuteCommand(new Jump(_player));
+                        break;
+
                 }
             }
         }
