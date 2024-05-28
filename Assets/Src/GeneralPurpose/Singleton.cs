@@ -1,3 +1,6 @@
+// Codigo de la asignatura presenta en las diapositivas sobre el patrón singleton
+
+
 using UnityEngine;
 
 namespace GeneralPurpose
