@@ -6,16 +6,19 @@ namespace Menu.States
 {
     public class Options : AMenuState
     {
-        public Options() : base("Menus/Options") { }
+        private bool _comeFromGameplay;
+        public Options(bool comeFromGameplay) : base("Menus/Options") 
+        {
+            _comeFromGameplay = comeFromGameplay;
+        }
 
         protected override void OnMenuNavigation(MenuButtons type)
         {
             switch (type)
             {
                 case MenuButtons.Back:
-                    // Aquí habrá que diferenciar entre estabas en gameplay o estabas en menu principal,
-                    // probablemente con un parámetro en el constructor de Options
-                    MenuManager.Instance.SetState(new MainMenu());
+                    if (_comeFromGameplay) MenuManager.Instance.SetState(new Pause());
+                    else MenuManager.Instance.SetState(new MainMenu());
                     break;
                 default:
                     Debug.LogError("ERROR UNKONW MENUBUTTON TYPE: " + type);
@@ -25,6 +28,11 @@ namespace Menu.States
 
         public override void Update(float deltaTime)
         {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                if (_comeFromGameplay) MenuManager.Instance.SetState(new Pause());
+                else MenuManager.Instance.SetState(new MainMenu());
+            }
         }
     }
 }

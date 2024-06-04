@@ -13,10 +13,11 @@ namespace Menu.States
             switch (type)
             {
                 case MenuButtons.Play:
-                    Debug.Log("Has pulsado Play");
+                    MenuManager.Instance.SetState(new Gameplay());
+                    // Aqui va tambien el cambio de escena a la de gameplay
                     break;
                 case MenuButtons.Options:
-                    MenuManager.Instance.SetState(new Options());
+                    MenuManager.Instance.SetState(new Options(false));
                     break;
                 case MenuButtons.Credits:
                     MenuManager.Instance.SetState(new Credits());

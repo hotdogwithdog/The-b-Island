@@ -24,5 +24,10 @@ namespace Menu
 
             _currentState.Enter();
         }
+
+        private void Update()
+        {
+            _currentState.Update(Time.deltaTime);   
+        }
     }
 }

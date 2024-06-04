@@ -12,11 +12,18 @@ namespace Menu.States
         {
             switch (type)
             {
-                case MenuButtons.Options:
-                    MenuManager.Instance.SetState(new Options());
+                case MenuButtons.Resume:
+                    MenuManager.Instance.SetState(new Gameplay());
                     break;
-                case MenuButtons.Back:
-                    //MenuManager.Instance.SetState(new Gameplay());
+                case MenuButtons.Options:
+                    MenuManager.Instance.SetState(new Options(true));
+                    break;
+                case MenuButtons.Quit:
+                    #if UNITY_EDITOR
+                        EditorApplication.isPlaying = false;
+                    #else
+                        Application.Quit();
+                    #endif
                     break;
                 default:
                     Debug.LogError("ERROR UNKONW MENUBUTTON TYPE: " + type);
@@ -26,6 +33,7 @@ namespace Menu.States
 
         public override void Update(float deltaTime)
         {
+            if (Input.GetKeyDown(KeyCode.Escape)) MenuManager.Instance.SetState(new Gameplay());
         }
     }
 }

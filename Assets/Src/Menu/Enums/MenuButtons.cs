@@ -6,6 +6,7 @@
         Options = 1,
         Credits = 2,
         Back = 3,
-        Quit = 4
+        Quit = 4,
+        Resume = 5
     }
 }
