@@ -20,7 +20,7 @@ namespace Command.Clients
             // _menuCommandManager = new Invoker.CommandManager();
         }
 
-
+        
         public void Update()
         {
             // Inputs y su gestion

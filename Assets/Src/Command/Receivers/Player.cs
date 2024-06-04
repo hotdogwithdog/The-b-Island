@@ -7,18 +7,29 @@ namespace Command.Receivers
     public class Player : MonoBehaviour, Interfaces.IMoveableReceiver, Interfaces.IJumperReceiver
     {
         [SerializeField] private float _speed = 8;
+        [SerializeField] private Transform _footPosition;
+        [SerializeField] private float _jumpForce = 3.0f;
+
+        private SpriteRenderer _spriteRenderer;
+        private Animator _animator;
+        private bool _isLookingRight = true;
+
         private Vector2 _currentVelocity;
         private Vector2 _inputDirection;
         private float _inputFactor;
+
         private Rigidbody2D _rigidbody2D;
+
         private bool _isGrounded;
-        [SerializeField] private Transform _footPosition;
-        [SerializeField] private float _jumpForce = 3.0f;
         private bool _isJumping;
+
+        
 
         private void Start()
         {
             _rigidbody2D = GetComponent<Rigidbody2D>();
+            _animator = GetComponent<Animator>();
+            _spriteRenderer = GetComponent<SpriteRenderer>();
         }
 
         private void FixedUpdate()
@@ -43,6 +54,18 @@ namespace Command.Receivers
             _isGrounded = Physics2D.OverlapCircle(_footPosition.position, 0.3f, LayerMask.GetMask("Floor"));
 
             _inputFactor = Mathf.Abs(Input.GetAxis("Horizontal"));
+
+            // Le pasamos a los valores del animador los valores del jugador
+            _animator.SetFloat("Speed", Mathf.Abs(_rigidbody2D.velocity.x));
+            _animator.SetBool("isGrounded", _isGrounded);
+
+            // Miramos si debemos voltear o no el sprite
+            if (_rigidbody2D.velocity.x > 0.1) _isLookingRight = true;
+            else if (_rigidbody2D.velocity.x < -0.1) _isLookingRight = false;
+
+            if (_isLookingRight) _spriteRenderer.flipX = false;
+            else _spriteRenderer.flipX = true;
+
         }
 
         public void Move(Vector2 direction)
