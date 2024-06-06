@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using Command.Receivers;
 using Command.Commands.Movement;
+using Command.Commands.Actions;
 
 namespace Command.Clients
 {
@@ -11,13 +12,11 @@ namespace Command.Clients
 
         private Player _player; // Ref to Receiver
         private Invoker.CommandManager _playerCommandManager; // Player Invoker
-        // private Invoker.CommandManager _menuCommandManager;
 
         private void Start()
         {
             _player = GameObject.FindWithTag("Player").GetComponent<Player>();
             _playerCommandManager = new Invoker.CommandManager();
-            // _menuCommandManager = new Invoker.CommandManager();
         }
 
         
@@ -39,9 +38,14 @@ namespace Command.Clients
                     case " ":
                         _playerCommandManager.ExecuteCommand(new Jump(_player));
                         break;
-
+                    case "j":
+                    case "J":
+                        _playerCommandManager.ExecuteCommand(new Attack(_player));
+                        break;
                 }
             }
+            // Mouse left
+            if (Input.GetMouseButtonDown(0)) _playerCommandManager.ExecuteCommand(new Attack(_player));
         }
 
     }

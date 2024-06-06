@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Command.Receivers
 {
-    public class Player : MonoBehaviour, Interfaces.IMoveableReceiver, Interfaces.IJumperReceiver
+    public class Player : MonoBehaviour, Interfaces.IMoveableReceiver, Interfaces.IJumperReceiver, Interfaces.IAttackReceiver
     {
         [SerializeField] private float _speed = 8;
         [SerializeField] private Transform _footPosition;
@@ -13,6 +13,8 @@ namespace Command.Receivers
         private SpriteRenderer _spriteRenderer;
         private Animator _animator;
         private bool _isLookingRight = true;
+        [SerializeField] private Animator _swordAnimator;
+        [SerializeField] private SpriteRenderer _swordSpriteRenderer;
 
         private Vector2 _currentVelocity;
         private Vector2 _inputDirection;
@@ -23,13 +25,18 @@ namespace Command.Receivers
         private bool _isGrounded;
         private bool _isJumping;
 
-        
+        [SerializeField] private float _attackDamage = 25.0f;
+        [SerializeField] private Transform _swordPosition;
 
         private void Start()
         {
             _rigidbody2D = GetComponent<Rigidbody2D>();
             _animator = GetComponent<Animator>();
             _spriteRenderer = GetComponent<SpriteRenderer>();
+            
+            // Intetamos utilizar GetComponentInChildren para coger el animador y sprite renderer de la espada, pero no lo hacia
+            //_swordAnimator = GetComponentInChildren<Animator>();
+            //_swordSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
         }
 
         private void FixedUpdate()
@@ -58,13 +65,25 @@ namespace Command.Receivers
             // Le pasamos a los valores del animador los valores del jugador
             _animator.SetFloat("Speed", Mathf.Abs(_rigidbody2D.velocity.x));
             _animator.SetBool("isGrounded", _isGrounded);
+            
 
             // Miramos si debemos voltear o no el sprite
             if (_rigidbody2D.velocity.x > 0.1) _isLookingRight = true;
             else if (_rigidbody2D.velocity.x < -0.1) _isLookingRight = false;
 
-            if (_isLookingRight) _spriteRenderer.flipX = false;
-            else _spriteRenderer.flipX = true;
+            if (_isLookingRight)
+            {
+                _spriteRenderer.flipX = false;
+                _swordSpriteRenderer.flipX = false;
+                _swordPosition.localPosition = new Vector3(0.758f, _swordPosition.localPosition.y, _swordPosition.localPosition.z);
+            }
+            else
+            {
+                _spriteRenderer.flipX = true;
+                _swordSpriteRenderer.flipX = true;
+                _swordPosition.localPosition = new Vector3(-0.758f, _swordPosition.localPosition.y, _swordPosition.localPosition.z);
+            }
+            
 
         }
 
@@ -79,6 +98,22 @@ namespace Command.Receivers
             {
                 _isJumping = true;
                 _isGrounded = false;
+            }
+        }
+
+        public void Attack()
+        {
+            _swordAnimator.SetTrigger("Attack");
+            // Utilizamos la mitad escala local, puesto que la espada sin escalar tiene el tamaño de una unidad y el centro del circulo
+            // en el centro del sprite
+            Collider2D[] objects = Physics2D.OverlapCircleAll(_swordPosition.position, _swordPosition.localScale.x / 2);
+
+            foreach (Collider2D enemy in objects)
+            {
+                if (enemy.tag == "Enemy")
+                {
+                    Debug.Log("SI");
+                }
             }
         }
     }
