@@ -23,6 +23,7 @@ namespace Menu.States
 
         public override void Update(float deltaTime)
         {
+            if (Input.GetKeyDown(KeyCode.Escape)) MenuManager.Instance.SetState(new MainMenu());
         }
     }
 }
