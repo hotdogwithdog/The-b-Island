@@ -863,7 +863,7 @@ GameObject:
   m_Component:
   - component: {fileID: 997478523}
   m_Layer: 6
-  m_Name: posLeft
+  m_Name: posLeft_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1005,7 +1005,7 @@ GameObject:
   - component: {fileID: 1547703376}
   - component: {fileID: 1547703377}
   m_Layer: 6
-  m_Name: Circle
+  m_Name: Enemy_01
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1401,7 +1401,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2065823745}
   m_Layer: 6
-  m_Name: PosRight
+  m_Name: PosRight_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

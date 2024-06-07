@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Command.Receivers
 {
-    public class Player : MonoBehaviour, Interfaces.IMoveableReceiver, Interfaces.IJumperReceiver, Interfaces.IAttackReceiver
+    public class Player : Entity.AEntity, Interfaces.IMoveableReceiver, Interfaces.IJumperReceiver, Interfaces.IAttackReceiver
     {
         [SerializeField] private float _speed = 8;
         [SerializeField] private Transform _footPosition;
@@ -25,7 +25,6 @@ namespace Command.Receivers
         private bool _isGrounded;
         private bool _isJumping;
 
-        [SerializeField] private float _attackDamage = 25.0f;
         [SerializeField] private Transform _swordPosition;
 
         private void Start()
@@ -112,9 +111,14 @@ namespace Command.Receivers
             {
                 if (enemy.tag == "Enemy")
                 {
-                    Debug.Log("SI");
+                    enemy.GetComponent<Entity.AEntity>().TakeDamage(_attackDamage);
                 }
             }
+        }
+
+        public override void Dead()
+        {
+            Debug.Log("Player Dead");
         }
     }
 }

@@ -1,0 +1,13 @@
+
+
+namespace Observer.Subjects
+{
+    public interface ISubject_void_Enemy
+    {
+        public void Invoke();
+
+        public void Subscribe(Observers.IObserver_void_Enemy observer);
+
+        public void Unsuscribe(Observers.IObserver_void_Enemy observer);
+    }
+}
