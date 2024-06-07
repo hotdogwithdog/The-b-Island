@@ -60,7 +60,7 @@ namespace Command.Receivers
         public override void Dead()
         {
             // Lo primero es acceder al enemies controller para sacar este objeto de la lista de enemigos, lo vamos a hacer con un patron observador
-            Invoke();
+            Invoke(this);
 
             // destruyo los objetos es el enemigo, y no tiene animación de muerte así que simplemente se libera la memoria de este, destruyendo tambien
             // los puntos que controlan el movimiento
@@ -78,11 +78,11 @@ namespace Command.Receivers
             }
         }
 
-        public void Invoke()
+        public void Invoke(Enemy enemy)
         {
             foreach (IObserver_void_Enemy observer in _observers)
             {
-                observer.Notify(this);
+                observer.Notify(enemy);
             }
         }
 

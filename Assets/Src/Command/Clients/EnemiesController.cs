@@ -38,9 +38,7 @@ namespace Command.Clients
             _enemiesInfo = new List<EnemyInfo>();
             _enemiesCommandManager = new Invoker.CommandManager();
 
-            GameObject enemiesContainer = GameObject.Find("Enemies");
-
-            foreach (Enemy enemy in enemiesContainer.GetComponentsInChildren<Enemy>())
+            foreach (Enemy enemy in this.GetComponentsInChildren<Enemy>())
             {
                 enemy.Subscribe(this);  // me suscribo para cuando el enemigo es derrotado destruir el objeto
                 _enemiesInfo.Add(new EnemyInfo(enemy, enemy.positionLeft, enemy.positionRight));
@@ -52,9 +50,6 @@ namespace Command.Clients
         {
             foreach (EnemyInfo enemyInfo in _enemiesInfo)
             {
-                Debug.Log(enemyInfo.positionLeft);
-                Debug.Log(enemyInfo.positionRight);
-
                 if (enemyInfo.enemy.transform.position.x < enemyInfo.positionLeft.position.x) enemyInfo.enemy.IsGoingToPointLeft = false;
                 else if (enemyInfo.enemy.transform.position.x > enemyInfo.positionRight.position.x) enemyInfo.enemy.IsGoingToPointLeft = true; ;
 
