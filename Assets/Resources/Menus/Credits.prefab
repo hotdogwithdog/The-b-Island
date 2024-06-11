@@ -518,8 +518,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Iv\xE1n Garc\xEDa Garc\xEDa\n\nIv\xE1n Jimenez Blas\n\nSeguio Lopez \n\nSerre
-    (xd)"
+  m_text: "Iv\xE1n Garc\xEDa Garc\xEDa\n\nIv\xE1n Jim\xE9nez Blas\n\nSergio L\xF3pez
+    Llorente\n\nAlejandro Serrej\xF3n Beltr\xE1n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
