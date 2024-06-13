@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Playgrounds/Ivan_G_Playground.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Scenes/MainMenu.unity
+    guid: 28c3a5717dabdfa42ad87e48c55d3404
+  - enabled: 1
+    path: Assets/Scenes/Level1.unity
+    guid: 85342e98e26a4ab45aba2747b0c8e0fa
   m_configObjects: {}

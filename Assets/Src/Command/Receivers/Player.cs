@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Command.Receivers
 {
-    public class Player : Entity.AEntity, Interfaces.IMoveableReceiver, Interfaces.IJumperReceiver, Interfaces.IAttackReceiver
+    public class Player : Entity.AEntity, Interfaces.IMoveableReceiver, Interfaces.IJumperReceiver, Interfaces.IAttackReceiver, Observer.Observers.IObserver_void
     {
         [SerializeField] private float _speed = 8;
         [SerializeField] private Transform _footPosition;
@@ -32,10 +33,8 @@ namespace Command.Receivers
             _rigidbody2D = GetComponent<Rigidbody2D>();
             _animator = GetComponent<Animator>();
             _spriteRenderer = GetComponent<SpriteRenderer>();
-            
-            // Intetamos utilizar GetComponentInChildren para coger el animador y sprite renderer de la espada, pero no lo hacia
-            //_swordAnimator = GetComponentInChildren<Animator>();
-            //_swordSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
+
+            GameObject.Find("DeathLimit").GetComponent<Limits.FallDeath>().Suscribe(this);
         }
 
         private void FixedUpdate()
@@ -118,7 +117,12 @@ namespace Command.Receivers
 
         public override void Dead()
         {
-            Debug.Log("Player Dead");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
+        public void Notify()
+        {
+            Dead();
         }
     }
 }
