@@ -1,5 +1,6 @@
 ﻿using Menu.Enums;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEditor;
 
 namespace Menu.States
@@ -14,7 +15,9 @@ namespace Menu.States
             {
                 case MenuButtons.Play:
                     MenuManager.Instance.SetState(new Gameplay());
-                    // Aqui va tambien el cambio de escena a la de gameplay
+
+                    SceneManager.LoadScene("Level1");
+
                     break;
                 case MenuButtons.Options:
                     MenuManager.Instance.SetState(new Options(false));
