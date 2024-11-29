@@ -1,7 +1,7 @@
 # **The B Island**
 
 Is a project created for one university work.  
-The objective of the work was implement at least 3 programming pattenrs.
+The objective of the work was implement at least 3 programming patterns.
 
  **Team**:   
 * Iván García García: Software Developer.   
